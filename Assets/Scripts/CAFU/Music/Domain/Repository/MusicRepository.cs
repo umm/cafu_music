@@ -12,7 +12,11 @@ namespace CAFU.Music.Domain.Repository {
 
     }
 
-    public class MusicRepository<TMusicEntity> : IMusicRepository where TMusicEntity : IMusicEntity {
+    public interface IMusicRepository<TMusicEntity> : IMusicRepository where TMusicEntity : IMusicEntity {
+
+    }
+
+    public class MusicRepository<TMusicEntity> : IMusicRepository<TMusicEntity> where TMusicEntity : IMusicEntity {
 
         public class Factory : DefaultRepositoryFactory<Factory, MusicRepository<TMusicEntity>> {
 
@@ -23,7 +27,7 @@ namespace CAFU.Music.Domain.Repository {
 
         }
 
-        private IMusicDataStore MusicDataStore { get; set; }
+        private IMusicDataStore<TMusicEntity> MusicDataStore { get; set; }
 
         public AudioClip GetAudioClip<TEnum>(TEnum key) where TEnum : struct {
             return this.MusicDataStore.GetAudioClip(key);
