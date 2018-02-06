@@ -2,18 +2,9 @@
 using System.Linq;
 using CAFU.Core.Data.DataStore;
 using CAFU.Music.Data.Entity;
-using UniRx;
 using UnityEngine;
-// ReSharper disable UnusedMember.Global
 
 namespace CAFU.Music.Data.DataStore.Scene {
-
-    public interface IMusicDataStoreController<TMusicEntity> where TMusicEntity : IMusicEntity {
-
-        [ObservableAwakeMonoBehaviour]
-        MusicDataStore<TMusicEntity> MusicDataStore { get; }
-
-    }
 
     public abstract class MusicDataStore<TMusicEntity> : MonoBehaviour, IMusicDataStore where TMusicEntity : IMusicEntity {
 
