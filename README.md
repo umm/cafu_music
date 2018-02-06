@@ -68,7 +68,7 @@ namespace SampleProject.Presentation.View.SampleScene {
     public class Controller : Controller<SampleScenePresenter, SampleScenePresenter.Factory>, IMusicController<MusicEntity> {
         [SerializeField]
         private MusicDataStore musicDataStore;
-        public MusicDataStore<MusicEntity> MusicDataStore => this.musicDataStore;
+        public IMusicDataStore<MusicEntity> MusicDataStore => this.musicDataStore;
     }
 }
 ```
