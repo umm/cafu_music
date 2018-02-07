@@ -18,7 +18,7 @@ namespace CAFU.Music.Domain.UseCase {
 
     }
 
-    public interface IMusicUseCase : ISingletonUseCase {
+    public interface IMusicUseCase : IUseCase {
 
         void Play<TEnum>(TEnum key, bool loop = true, bool keepIfSame = true) where TEnum : struct;
 

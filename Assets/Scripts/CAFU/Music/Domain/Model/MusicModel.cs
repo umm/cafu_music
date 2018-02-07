@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CAFU.Music.Domain.Model {
 
-    public interface IMusicModel : IModel {
+    public interface IMusicModel : ISingletonModel {
 
         ReactiveProperty<AudioClip> AudioClip { get; }
 
