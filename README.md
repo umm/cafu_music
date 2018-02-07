@@ -43,17 +43,29 @@ namespace SampleProject.Data.Entity {
 
 * Unity の仕様により Generic クラスを Serialize できないため、プロジェクトごとに継承する必要があります😢
 
-#### 3. `CAFU.Music.Data.DataStore.Scene.MusicDataStore<TMusicEntity>` を継承した DataStore クラスを作成
+#### 3. `CAFU.Music.Data.DataStore.MusicDataStore***<TMusicEntity>` を継承した DataStore クラスを作成
+
+* Unity の仕様により Generic クラスを Serialize できないため、プロジェクトごとに継承する必要があります😢
+
+##### シーン内で単一の BGM を再生する場合
 
 ```csharp
 using CAFU.Music.Data.DataStore;
 using SampleProject.Data.Entity;
-namespace SampleProject.Data.DataStore.Scene {
-    public class MusicDataStore : MusicDataStore<MusicEntity> {}
+namespace SampleProject.Data.DataStore {
+    public class MusicDataStore : MusicDataStoreSingle<MusicEntity> {}
 }
 ```
 
-* Unity の仕様により Generic クラスを Serialize できないため、プロジェクトごとに継承する必要があります😢
+##### シーン内で複数の BGM を切り替えて再生する場合
+
+```csharp
+using CAFU.Music.Data.DataStore;
+using SampleProject.Data.Entity;
+namespace SampleProject.Data.DataStore {
+    public class MusicDataStore : MusicDataStoreMultiple<MusicEntity> {}
+}
+```
 
 ### シーン準備編
 
@@ -65,10 +77,10 @@ using CAFU.Music.Presentation.View;
 using SampleProject.Data.Entity;
 using UnityEngine;
 namespace SampleProject.Presentation.View.SampleScene {
-    public class Controller : Controller<SampleScenePresenter, SampleScenePresenter.Factory>, IMusicController<MusicEntity> {
+    public class Controller : Controller<SampleScenePresenter, SampleScenePresenter.Factory>, IMusicController {
         [SerializeField]
         private MusicDataStore musicDataStore;
-        public IMusicDataStore<MusicEntity> MusicDataStore => this.musicDataStore;
+        public IMusicDataStore MusicDataStore => this.musicDataStore;
     }
 }
 ```
@@ -98,6 +110,12 @@ namespace SampleProject.Presentation.Presenter {
 #### 4. アタッチされている `Controller` の *Music Data Store* フィールドに 3. の GameObject を D&amp;D
 
 * これにより、実行順制御が可能になります。
+
+#### 5. Scene で用いる BGM を `MusicDataStore` のフィールドに設定
+
+<img width="302" alt="2018-02-07 11 11 10" src="https://user-images.githubusercontent.com/838945/35894754-afcbecc8-0bf7-11e8-87d2-27d3c344ddf8.png">
+
+* 上のスクショは `MusicDataStore` が `MusicDataStoreSingle<TMusicEntity>` を継承しているケース
 
 ### 利用編
 
