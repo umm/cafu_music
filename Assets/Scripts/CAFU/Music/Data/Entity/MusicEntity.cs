@@ -7,13 +7,13 @@ namespace CAFU.Music.Data.Entity {
 
     public interface IMusicEntity : IEntity {
 
+        AudioClip AudioClip { get; }
+
     }
 
     public interface IMusicEntity<out TEnum> : IMusicEntity where TEnum : struct {
 
         TEnum Key { get; }
-
-        AudioClip AudioClip { get; }
 
     }
 
