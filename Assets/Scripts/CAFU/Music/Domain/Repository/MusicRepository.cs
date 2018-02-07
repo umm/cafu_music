@@ -1,7 +1,6 @@
-﻿using CAFU.Core.Domain.Repository;
+﻿using CAFU.Core.Data.DataStore;
+using CAFU.Core.Domain.Repository;
 using CAFU.Music.Data.DataStore;
-using CAFU.Music.Data.DataStore.Scene;
-using CAFU.Music.Data.Entity;
 using UnityEngine;
 
 namespace CAFU.Music.Domain.Repository {
@@ -12,22 +11,20 @@ namespace CAFU.Music.Domain.Repository {
 
     }
 
-    public interface IMusicRepository<TMusicEntity> : IMusicRepository where TMusicEntity : IMusicEntity {
+    public class MusicRepository : IMusicRepository {
 
-    }
+        public static IDataStoreFactory<IMusicDataStore> DataStoreFactory { private get; set; }
 
-    public class MusicRepository<TMusicEntity> : IMusicRepository<TMusicEntity> where TMusicEntity : IMusicEntity {
+        public class Factory : DefaultRepositoryFactory<Factory, MusicRepository> {
 
-        public class Factory : DefaultRepositoryFactory<Factory, MusicRepository<TMusicEntity>> {
-
-            protected override void Initialize(MusicRepository<TMusicEntity> instance) {
+            protected override void Initialize(MusicRepository instance) {
                 base.Initialize(instance);
-                instance.MusicDataStore = MusicDataStore<TMusicEntity>.Factory.Instance.Create();
+                instance.MusicDataStore = DataStoreFactory.Create();
             }
 
         }
 
-        private IMusicDataStore<TMusicEntity> MusicDataStore { get; set; }
+        private IMusicDataStore MusicDataStore { get; set; }
 
         public AudioClip GetAudioClip<TEnum>(TEnum key) where TEnum : struct {
             return this.MusicDataStore.GetAudioClip(key);
