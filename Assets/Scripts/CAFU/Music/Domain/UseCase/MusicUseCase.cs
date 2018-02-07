@@ -1,5 +1,4 @@
 ﻿using CAFU.Core.Domain.UseCase;
-using CAFU.Music.Data.Entity;
 using CAFU.Music.Domain.Component;
 using CAFU.Music.Domain.Model;
 using CAFU.Music.Domain.Repository;
@@ -31,14 +30,14 @@ namespace CAFU.Music.Domain.UseCase {
 
     }
 
-    public class MusicUseCase<TMusicEntity> : IMusicUseCase where TMusicEntity : IMusicEntity {
+    public class MusicUseCase : IMusicUseCase {
 
-        public class Factory : DefaultUseCaseFactory<Factory, MusicUseCase<TMusicEntity>> {
+        public class Factory : DefaultUseCaseFactory<Factory, MusicUseCase> {
 
-            protected override void Initialize(MusicUseCase<TMusicEntity> instance) {
+            protected override void Initialize(MusicUseCase instance) {
                 base.Initialize(instance);
                 instance.MusicModel = Model.MusicModel.Factory.Instance.Create();
-                instance.MusicRepository = MusicRepository<TMusicEntity>.Factory.Instance.Create();
+                instance.MusicRepository = Repository.MusicRepository.Factory.Instance.Create();
                 // タイミング的にココで注入しないと ReactiveProperty の Subscribe が間に合わない
                 MusicPlayer.Install(instance.MusicModel);
             }
