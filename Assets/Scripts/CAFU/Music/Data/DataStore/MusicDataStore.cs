@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace CAFU.Music.Data.DataStore {
 
-    public interface IMusicDataStore : IDataStore {
+    public interface IMusicDataStore<in TEnum> : IDataStore where TEnum : struct {
 
-        AudioClip GetAudioClip<TEnum>(TEnum key) where TEnum : struct;
+        AudioClip GetAudioClip(TEnum key);
 
     }
 
     [DisallowMultipleComponent]
-    public abstract class MusicDataStoreBase : ObservableLifecycleMonoBehaviour, IMusicDataStore {
+    public abstract class MusicDataStoreBase<TEnum> : ObservableLifecycleMonoBehaviour, IMusicDataStore<TEnum> where TEnum : struct {
 
-        public abstract AudioClip GetAudioClip<TEnum>(TEnum key) where TEnum : struct;
+        public abstract AudioClip GetAudioClip(TEnum key);
 
     }
 

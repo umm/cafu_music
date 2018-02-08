@@ -2,6 +2,7 @@
 using CAFU.Music.Domain.Component;
 using CAFU.Music.Domain.Model;
 using CAFU.Music.Domain.Repository;
+
 // ReSharper disable UnusedMember.Global
 
 namespace CAFU.Music.Domain.UseCase {
@@ -18,9 +19,9 @@ namespace CAFU.Music.Domain.UseCase {
 
     }
 
-    public interface IMusicUseCase : IUseCase {
+    public interface IMusicUseCase<in TEnum> : IUseCase where TEnum : struct {
 
-        void Play<TEnum>(TEnum key, bool loop = true, bool keepIfSame = true) where TEnum : struct;
+        void Play(TEnum key, bool loop = true, bool keepIfSame = true);
 
         void Stop();
 
@@ -30,14 +31,14 @@ namespace CAFU.Music.Domain.UseCase {
 
     }
 
-    public class MusicUseCase : IMusicUseCase {
+    public class MusicUseCase<TEnum> : IMusicUseCase<TEnum> where TEnum : struct {
 
-        public class Factory : DefaultUseCaseFactory<Factory, MusicUseCase> {
+        public class Factory : DefaultUseCaseFactory<MusicUseCase<TEnum>> {
 
-            protected override void Initialize(MusicUseCase instance) {
+            protected override void Initialize(MusicUseCase<TEnum> instance) {
                 base.Initialize(instance);
-                instance.MusicModel = Model.MusicModel.Factory.Instance.Create();
-                instance.MusicRepository = Repository.MusicRepository.Factory.Instance.Create();
+                instance.MusicModel = new MusicModel.Factory().Create();
+                instance.MusicRepository = new MusicRepository<TEnum>.Factory().Create();
                 // タイミング的にココで注入しないと ReactiveProperty の Subscribe が間に合わない
                 MusicPlayer.Install(instance.MusicModel);
             }
@@ -46,9 +47,9 @@ namespace CAFU.Music.Domain.UseCase {
 
         private IMusicModel MusicModel { get; set; }
 
-        private IMusicRepository MusicRepository { get; set; }
+        private IMusicRepository<TEnum> MusicRepository { get; set; }
 
-        public void Play<TEnum>(TEnum key, bool loop = true, bool keepIfSame = true) where TEnum : struct {
+        public void Play(TEnum key, bool loop = true, bool keepIfSame = true) {
             // 既に再生中の場合は何もしない
             if (keepIfSame && this.MusicModel.AudioClip.Value == this.MusicRepository.GetAudioClip(key)) {
                 return;

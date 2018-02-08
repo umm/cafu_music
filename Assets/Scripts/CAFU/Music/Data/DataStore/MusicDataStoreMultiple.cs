@@ -9,9 +9,9 @@ using UnityEngine;
 
 namespace CAFU.Music.Data.DataStore {
 
-    public abstract class MusicDataStoreMultiple<TMusicEntity> : MusicDataStoreBase where TMusicEntity : IMusicEntity {
+    public abstract class MusicDataStoreMultiple<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity {
 
-        public class Factory : SceneDataStoreFactory<Factory, MusicDataStoreMultiple<TMusicEntity>> {
+        public class Factory : SceneDataStoreFactory<MusicDataStoreMultiple<TEnum, TMusicEntity>> {
 
         }
 
@@ -26,10 +26,10 @@ namespace CAFU.Music.Data.DataStore {
 
         protected override void OnAwake() {
             base.OnAwake();
-            MusicRepository.DataStoreFactory = Factory.Instance;
+            MusicRepository<TEnum>.DataStoreFactory = new Factory();
         }
 
-        public override AudioClip GetAudioClip<TEnum>(TEnum key) {
+        public override AudioClip GetAudioClip(TEnum key) {
             return this.MusicEntityList.OfType<IMusicEntity<TEnum>>().ToList().Find(x => Equals(x.Key, key)).AudioClip;
         }
 
