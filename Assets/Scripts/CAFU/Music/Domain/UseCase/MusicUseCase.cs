@@ -33,7 +33,7 @@ namespace CAFU.Music.Domain.UseCase {
 
     public class MusicUseCase<TEnum> : IMusicUseCase<TEnum> where TEnum : struct {
 
-        public class Factory : DefaultUseCaseFactory<Factory, MusicUseCase<TEnum>> {
+        public class Factory : DefaultUseCaseFactory<MusicUseCase<TEnum>> {
 
             protected override void Initialize(MusicUseCase<TEnum> instance) {
                 base.Initialize(instance);

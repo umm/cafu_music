@@ -9,7 +9,7 @@ namespace CAFU.Music.Data.DataStore {
 
     public abstract class MusicDataStoreSingle<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity {
 
-        public class Factory : SceneDataStoreFactory<Factory, MusicDataStoreSingle<TEnum, TMusicEntity>> {
+        public class Factory : SceneDataStoreFactory<MusicDataStoreSingle<TEnum, TMusicEntity>> {
 
         }
 
@@ -30,8 +30,6 @@ namespace CAFU.Music.Data.DataStore {
         public override AudioClip GetAudioClip(TEnum key) {
             return this.MusicEntity.AudioClip;
         }
-
-
 
     }
 

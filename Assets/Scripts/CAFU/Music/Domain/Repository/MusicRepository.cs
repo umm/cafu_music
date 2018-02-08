@@ -15,7 +15,7 @@ namespace CAFU.Music.Domain.Repository {
 
         public static IDataStoreFactory<IMusicDataStore<TEnum>> DataStoreFactory { private get; set; }
 
-        public class Factory : DefaultRepositoryFactory<Factory, MusicRepository<TEnum>> {
+        public class Factory : DefaultRepositoryFactory<MusicRepository<TEnum>> {
 
             protected override void Initialize(MusicRepository<TEnum> instance) {
                 base.Initialize(instance);

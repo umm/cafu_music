@@ -11,7 +11,7 @@ namespace CAFU.Music.Data.DataStore {
 
     public abstract class MusicDataStoreMultiple<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity {
 
-        public class Factory : SceneDataStoreFactory<Factory, MusicDataStoreMultiple<TEnum, TMusicEntity>> {
+        public class Factory : SceneDataStoreFactory<MusicDataStoreMultiple<TEnum, TMusicEntity>> {
 
         }
 

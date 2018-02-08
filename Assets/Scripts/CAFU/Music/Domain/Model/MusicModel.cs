@@ -15,7 +15,7 @@ namespace CAFU.Music.Domain.Model {
 
     public class MusicModel : IMusicModel {
 
-        public class Factory : DefaultModelFactory<Factory, MusicModel> {
+        public class Factory : DefaultModelFactory<MusicModel> {
 
             protected override void Initialize(MusicModel instance) {
                 base.Initialize(instance);
