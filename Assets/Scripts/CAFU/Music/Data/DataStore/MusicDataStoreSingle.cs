@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace CAFU.Music.Data.DataStore {
 
-    public abstract class MusicDataStoreSingle<TMusicEntity> : MusicDataStoreBase where TMusicEntity : IMusicEntity {
+    public abstract class MusicDataStoreSingle<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity {
 
-        public class Factory : SceneDataStoreFactory<Factory, MusicDataStoreSingle<TMusicEntity>> {
+        public class Factory : SceneDataStoreFactory<Factory, MusicDataStoreSingle<TEnum, TMusicEntity>> {
 
         }
 
@@ -24,10 +24,10 @@ namespace CAFU.Music.Data.DataStore {
 
         protected override void OnAwake() {
             base.OnAwake();
-            MusicRepository.DataStoreFactory = Factory.Instance;
+            MusicRepository<TEnum>.DataStoreFactory = new Factory();
         }
 
-        public override AudioClip GetAudioClip<TEnum>(TEnum key) {
+        public override AudioClip GetAudioClip(TEnum key) {
             return this.MusicEntity.AudioClip;
         }
 

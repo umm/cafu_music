@@ -5,28 +5,28 @@ using UnityEngine;
 
 namespace CAFU.Music.Domain.Repository {
 
-    public interface IMusicRepository : IRepository {
+    public interface IMusicRepository<in TEnum> : IRepository where TEnum : struct {
 
-        AudioClip GetAudioClip<TEnum>(TEnum key) where TEnum : struct;
+        AudioClip GetAudioClip(TEnum key);
 
     }
 
-    public class MusicRepository : IMusicRepository {
+    public class MusicRepository<TEnum> : IMusicRepository<TEnum> where TEnum : struct {
 
-        public static IDataStoreFactory<IMusicDataStore> DataStoreFactory { private get; set; }
+        public static IDataStoreFactory<IMusicDataStore<TEnum>> DataStoreFactory { private get; set; }
 
-        public class Factory : DefaultRepositoryFactory<Factory, MusicRepository> {
+        public class Factory : DefaultRepositoryFactory<Factory, MusicRepository<TEnum>> {
 
-            protected override void Initialize(MusicRepository instance) {
+            protected override void Initialize(MusicRepository<TEnum> instance) {
                 base.Initialize(instance);
                 instance.MusicDataStore = DataStoreFactory.Create();
             }
 
         }
 
-        private IMusicDataStore MusicDataStore { get; set; }
+        private IMusicDataStore<TEnum> MusicDataStore { get; set; }
 
-        public AudioClip GetAudioClip<TEnum>(TEnum key) where TEnum : struct {
+        public AudioClip GetAudioClip(TEnum key) {
             return this.MusicDataStore.GetAudioClip(key);
         }
 
