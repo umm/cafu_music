@@ -37,8 +37,8 @@ namespace CAFU.Music.Domain.UseCase {
 
             protected override void Initialize(MusicUseCase<TEnum> instance) {
                 base.Initialize(instance);
-                instance.MusicModel = Model.MusicModel.Factory.Instance.Create();
-                instance.MusicRepository = Repository.MusicRepository.Factory.Instance.Create();
+                instance.MusicModel = new MusicModel.Factory().Create();
+                instance.MusicRepository = new MusicRepository<TEnum>.Factory().Create();
                 // タイミング的にココで注入しないと ReactiveProperty の Subscribe が間に合わない
                 MusicPlayer.Install(instance.MusicModel);
             }
