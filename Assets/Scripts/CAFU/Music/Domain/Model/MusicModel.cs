@@ -2,6 +2,7 @@
 using CAFU.Core.Domain.Model;
 using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace CAFU.Music.Domain.Model {
 
@@ -28,6 +29,7 @@ namespace CAFU.Music.Domain.Model {
 
         public IMusicPlayer MusicPlayer { get; set; }
 
+        [Inject]
         private void Initialize() {
             this.AudioClip = new ReactiveProperty<AudioClip>();
         }
