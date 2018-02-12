@@ -39,8 +39,7 @@ namespace CAFU.Music.Domain.UseCase {
                 base.Initialize(instance);
                 instance.MusicModel = new MusicModel.Factory().Create();
                 instance.MusicRepository = new MusicRepository<TEnum>.Factory().Create();
-                // タイミング的にココで注入しないと ReactiveProperty の Subscribe が間に合わない
-                MusicPlayer.Install(instance.MusicModel);
+                instance.Initialize();
             }
 
         }
@@ -68,6 +67,11 @@ namespace CAFU.Music.Domain.UseCase {
 
         public void Resume() {
             this.MusicModel.MusicPlayer.Resume();
+        }
+
+        private void Initialize() {
+            // タイミング的にココで注入しないと ReactiveProperty の Subscribe が間に合わない
+            MusicPlayer.Install(this.MusicModel);
         }
 
     }

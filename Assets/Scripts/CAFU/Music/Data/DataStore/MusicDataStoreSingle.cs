@@ -7,9 +7,12 @@ using UnityEngine;
 
 namespace CAFU.Music.Data.DataStore {
 
-    public abstract class MusicDataStoreSingle<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity {
+    public abstract class MusicDataStoreSingle<TEnum, TMusicEntity, TMusicDataStore> : MusicDataStoreBase<TEnum>
+        where TEnum : struct
+        where TMusicEntity : IMusicEntity
+        where TMusicDataStore : MusicDataStoreSingle<TEnum, TMusicEntity, TMusicDataStore> {
 
-        public class Factory : SceneDataStoreFactory<MusicDataStoreSingle<TEnum, TMusicEntity>> {
+        public class Factory : SceneDataStoreFactory<MusicDataStoreSingle<TEnum, TMusicEntity, TMusicDataStore>> {
 
         }
 
