@@ -2,7 +2,7 @@
 using CAFU.Core.Presentation.Presenter;
 // ReSharper disable UnusedMember.Global
 
-namespace Assets.Scripts.CAFU.Music.Presentation.Presenter {
+namespace CAFU.Music.Presentation.Presenter {
 
     public interface IMusicPresenter<in TEnum> : IPresenter where TEnum : struct {
 
