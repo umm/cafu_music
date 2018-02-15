@@ -17,7 +17,7 @@ namespace CAFU.Music.Domain.UseCase {
 
         void Resume();
 
-        void Volume(float volume);
+        void SetVolume(float volume);
 
     }
 
@@ -31,7 +31,7 @@ namespace CAFU.Music.Domain.UseCase {
 
         void Resume();
 
-        void Volume(float volume);
+        void SetVolume(float volume);
 
     }
 
@@ -74,8 +74,8 @@ namespace CAFU.Music.Domain.UseCase {
             this.MusicModel.MusicPlayer.Resume();
         }
 
-        public void Volume(float volume) {
-            this.MusicModel.MusicPlayer.Volume(volume);
+        public void SetVolume(float volume) {
+            this.MusicModel.MusicPlayer.SetVolume(volume);
         }
 
     }

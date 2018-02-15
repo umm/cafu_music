@@ -57,7 +57,7 @@ namespace CAFU.Music.Domain.Component {
             this.AudioSource.UnPause();
         }
 
-        public void Volume(float volume) {
+        public void SetVolume(float volume) {
             this.AudioSource.volume = volume;
         }
 
