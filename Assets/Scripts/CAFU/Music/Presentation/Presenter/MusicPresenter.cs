@@ -28,6 +28,10 @@ namespace CAFU.Music.Presentation.Presenter {
             presenter.MusicUseCase.Resume();
         }
 
+        public static void VolumeMusic<TEnum>(this IMusicPresenter<TEnum> presenter, float volume) where TEnum : struct {
+            presenter.MusicUseCase.Volume(volume);
+        }
+
     }
 
 }

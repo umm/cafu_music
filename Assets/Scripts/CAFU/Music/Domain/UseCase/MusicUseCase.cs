@@ -17,6 +17,8 @@ namespace CAFU.Music.Domain.UseCase {
 
         void Resume();
 
+        void Volume(float volume);
+
     }
 
     public interface IMusicUseCase<in TEnum> : IUseCase where TEnum : struct {
@@ -28,6 +30,8 @@ namespace CAFU.Music.Domain.UseCase {
         void Pause();
 
         void Resume();
+
+        void Volume(float volume);
 
     }
 
@@ -68,6 +72,10 @@ namespace CAFU.Music.Domain.UseCase {
 
         public void Resume() {
             this.MusicModel.MusicPlayer.Resume();
+        }
+
+        public void Volume(float volume) {
+            this.MusicModel.MusicPlayer.Volume(volume);
         }
 
     }
