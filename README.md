@@ -149,6 +149,12 @@ this.GetPresenter().Pause();
 this.GetPresenter().Resume();
 ```
 
+#### ボリューム操作
+
+```csharp
+this.GetPresenter().SetVolume(0.5f);
+```
+
 ## License
 
 Copyright (c) 2018 Tetsuya Mori
