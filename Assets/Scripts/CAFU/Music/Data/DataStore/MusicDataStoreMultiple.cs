@@ -29,8 +29,13 @@ namespace CAFU.Music.Data.DataStore {
             MusicRepository<TEnum>.DataStoreFactory = new Factory();
         }
 
+        protected override void OnDestroy() {
+            base.OnDestroy();
+            this.musicEntityList.Clear();
+        }
+
         public override AudioClip GetAudioClip(TEnum key) {
-            return this.MusicEntityList.OfType<IMusicEntity<TEnum>>().ToList().Find(x => Equals(x.Key, key)).AudioClip;
+            return this.MusicEntityList.OfType<IMusicEntity<TEnum>>().First(x => Equals(x.Key, key)).AudioClip;
         }
 
     }

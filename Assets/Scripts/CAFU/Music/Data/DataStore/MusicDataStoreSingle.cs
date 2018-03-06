@@ -31,6 +31,11 @@ namespace CAFU.Music.Data.DataStore {
             return this.MusicEntity.AudioClip;
         }
 
+        protected override void OnDestroy() {
+            base.OnDestroy();
+            this.musicEntity = default(TMusicEntity);
+        }
+
     }
 
 }
