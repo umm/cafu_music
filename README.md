@@ -76,14 +76,18 @@ using CAFU.Core.Presentation.Presenter;
 using CAFU.Music.Presentation.Presenter;
 namespace SampleProject.Presentation.Presenter {
     public class SampleScenePresenter : IPresenter, IMusicPresenter {
+        public class Factory : DefaultPresenterFactory<SampleScenePresenter> {
+            protected override void Initialize(SampleScenePresenter instance) {
+                base.Initialize(instance);
+                instance.MusicUseCase = new MusicUseCase<MusicName>.Factory().Create();
+            }
+        }
         public IMusicUseCase MusicUseCase { get; private set; }
     }
 }
 ```
 
-* 拡張メソッドから利用します。
-* Factory の記述は省略しています。
-  * Zenject 使うと楽かな。
+* 拡張メソッドから利用するため、 `MusicUseCase` のプロパティ定義が必須です。
 
 #### 2. Scene の任意の GameObject に `MusicDataStore` をアタッチ
 
