@@ -92,7 +92,7 @@ namespace SampleProject.Presentation.Presenter {
 #### 2. Scene の任意の GameObject に `MusicDataStore` をアタッチ
 
 * Hierarchy ルートの `DataStore` とかがヨサソウです。
-* ![image](https://user-images.githubusercontent.com/838945/37551295-8ef4ebb0-29e0-11e8-9b52-41969b144be8.png)
+* ![image](https://user-images.githubusercontent.com/838945/37551428-98c130b6-29e2-11e8-9448-1165037f1586.png)
 * ![image](https://user-images.githubusercontent.com/838945/37551342-51303c66-29e1-11e8-9624-f63efff6c0fb.png)
 
 #### 3. アタッチされている `Controller` の *Music Data Store* フィールドに 2. の GameObject を D&amp;D
