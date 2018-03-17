@@ -69,25 +69,7 @@ namespace SampleProject.Data.DataStore {
 
 ### シーン準備編
 
-#### 1. `CAFU.Music.Presentation.View.IMusicController<TMusicEntity>` を Controller クラスに実装
-
-```csharp
-using CAFU.Core.Presentation.View;
-using CAFU.Music.Presentation.View;
-using SampleProject.Data.Entity;
-using UnityEngine;
-namespace SampleProject.Presentation.View.SampleScene {
-    public class Controller : Controller<SampleScenePresenter, SampleScenePresenter.Factory>, IMusicController {
-        [SerializeField]
-        private MusicDataStore musicDataStore;
-        public IMusicDataStore MusicDataStore => this.musicDataStore;
-    }
-}
-```
-
-* Component の `Awake()` 実行順制御を行う関係で必要になります。
-
-#### 2. `CAFU.Music.Presentation.Presenter.IMusicPresenter` を Presenter クラスに実装
+#### 1. `CAFU.Music.Presentation.Presenter.IMusicPresenter` を Presenter クラスに実装
 
 ```csharp
 using CAFU.Core.Presentation.Presenter;
@@ -103,19 +85,19 @@ namespace SampleProject.Presentation.Presenter {
 * Factory の記述は省略しています。
   * Zenject 使うと楽かな。
 
-#### 3. Scene の任意の GameObject に `MusicDataStore` をアタッチ
+#### 2. Scene の任意の GameObject に `MusicDataStore` をアタッチ
 
 * Hierarchy ルートの `DataStore` とかがヨサソウです。
+* ![image](https://user-images.githubusercontent.com/838945/37551295-8ef4ebb0-29e0-11e8-9b52-41969b144be8.png)
+* ![image](https://user-images.githubusercontent.com/838945/37551342-51303c66-29e1-11e8-9624-f63efff6c0fb.png)
 
-#### 4. アタッチされている `Controller` の *Music Data Store* フィールドに 3. の GameObject を D&amp;D
+#### 3. アタッチされている `Controller` の *Music Data Store* フィールドに 2. の GameObject を D&amp;D
 
 * これにより、実行順制御が可能になります。
 
-#### 5. Scene で用いる BGM を `MusicDataStore` のフィールドに設定
+#### 4. Scene で用いる BGM を `MusicDataStore` のフィールドに設定
 
-<img width="302" alt="2018-02-07 11 11 10" src="https://user-images.githubusercontent.com/838945/35894754-afcbecc8-0bf7-11e8-87d2-27d3c344ddf8.png">
-
-* 上のスクショは `MusicDataStore` が `MusicDataStoreSingle<TMusicEntity>` を継承しているケース
+* ![image](https://user-images.githubusercontent.com/838945/37551293-7ab19838-29e0-11e8-8447-1a1f724b1d34.png)
 
 ### 利用編
 
@@ -160,4 +142,3 @@ this.GetPresenter().SetVolume(0.5f);
 Copyright (c) 2018 Tetsuya Mori
 
 Released under the MIT license, see [LICENSE.txt](LICENSE.txt)
-
