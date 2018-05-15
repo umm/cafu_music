@@ -1,0 +1,14 @@
+##Usings##namespace ##Namespace##
+{
+    [Serializable]
+    public class ##ClassName## : ##BaseClassName####ImplementsInterfaces##
+    {
+        [SerializeField] private AudioClip audioClip;
+
+        public AudioClip AudioClip => audioClip;
+
+        [SerializeField] private MusicName key;
+
+        public MusicName Key => key;
+    }
+}
