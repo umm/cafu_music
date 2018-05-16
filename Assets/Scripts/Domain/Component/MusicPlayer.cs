@@ -1,66 +1,76 @@
-﻿using CAFU.Music.Domain.UseCase;
-using CAFU.Core.Presentation.View;
+﻿using CAFU.Core.Presentation.View;
 using CAFU.Music.Domain.Model;
+using CAFU.Music.Domain.UseCase;
 using UniRx;
 using UnityEngine;
 
 // View ではなく、Domain レイヤにより取り扱われるべきクラスなので、特別な namespace を付与する
-namespace CAFU.Music.Domain.Component {
-
-    public class MusicPlayer : MonoBehaviour, IMusicPlayer, IInjectableView<IMusicModel> {
-
+namespace CAFU.Music.Domain.Component
+{
+    public class MusicPlayer : MonoBehaviour, IMusicPlayer, IInjectableView<IMusicModel>
+    {
         private IMusicModel MusicModel { get; set; }
 
         private AudioSource AudioSource { get; set; }
 
         private static bool HasInstalled { get; set; }
 
-        public static void Install(IMusicModel musicModel) {
-            if (HasInstalled) {
+        public static void Install(IMusicModel musicModel)
+        {
+            if (HasInstalled)
+            {
                 return;
             }
-            GameObject go = new GameObject(typeof(MusicPlayer).Name);
-            MusicPlayer musicPlayer = go.AddComponent<MusicPlayer>();
+
+            var go = new GameObject(typeof(MusicPlayer).Name);
+            var musicPlayer = go.AddComponent<MusicPlayer>();
             musicPlayer.Inject(musicModel);
             DontDestroyOnLoad(go);
             HasInstalled = true;
         }
 
-        private void Awake() {
-            this.AudioSource = this.gameObject.GetComponent<AudioSource>();
-            if (this.AudioSource == default(AudioSource)) {
-                this.AudioSource = this.gameObject.AddComponent<AudioSource>();
+        private void Awake()
+        {
+            AudioSource = gameObject.GetComponent<AudioSource>();
+            if (AudioSource == default(AudioSource))
+            {
+                AudioSource = gameObject.AddComponent<AudioSource>();
             }
-            this.AudioSource.playOnAwake = false;
+
+            AudioSource.playOnAwake = false;
         }
 
-        public void Inject(IMusicModel musicModel) {
-            this.MusicModel = musicModel;
-            this.MusicModel.MusicPlayer = this;
-            this.MusicModel.AudioClip.Subscribe(audioClip => this.AudioSource.clip = audioClip);
+        public void Inject(IMusicModel musicModel)
+        {
+            MusicModel = musicModel;
+            MusicModel.MusicPlayer = this;
+            MusicModel.AudioClip.Subscribe(audioClip => AudioSource.clip = audioClip);
         }
 
-        public void Play(bool loop = true) {
-            this.AudioSource.loop = loop;
-            this.AudioSource.Play();
+        public void Play(bool loop = true)
+        {
+            AudioSource.loop = loop;
+            AudioSource.Play();
         }
 
-        public void Stop() {
-            this.AudioSource.Stop();
+        public void Stop()
+        {
+            AudioSource.Stop();
         }
 
-        public void Pause() {
-            this.AudioSource.Pause();
+        public void Pause()
+        {
+            AudioSource.Pause();
         }
 
-        public void Resume() {
-            this.AudioSource.UnPause();
+        public void Resume()
+        {
+            AudioSource.UnPause();
         }
 
-        public void SetVolume(float volume) {
-            this.AudioSource.volume = volume;
+        public void SetVolume(float volume)
+        {
+            AudioSource.volume = volume;
         }
-
     }
-
 }

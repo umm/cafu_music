@@ -1,42 +1,30 @@
 ﻿using CAFU.Core.Data.Entity;
+using JetBrains.Annotations;
 using UnityEngine;
 
-#pragma warning disable 649
-
-namespace CAFU.Music.Data.Entity {
-
-    public interface IMusicEntity : IEntity {
-
+namespace CAFU.Music.Data.Entity
+{
+    [PublicAPI]
+    public interface IMusicEntity : IEntity
+    {
         AudioClip AudioClip { get; }
-
     }
 
-    public interface IMusicEntity<out TEnum> : IMusicEntity where TEnum : struct {
-
+    [PublicAPI]
+    public interface IMusicEntity<out TEnum> : IMusicEntity where TEnum : struct
+    {
         TEnum Key { get; }
-
     }
 
-    public class MusicEntity<TEnum> : IMusicEntity<TEnum> where TEnum : struct {
+    [PublicAPI]
+    public class MusicEntity<TEnum> : IMusicEntity<TEnum> where TEnum : struct
+    {
+        [SerializeField] private TEnum key;
 
-        [SerializeField]
-        private TEnum key;
+        public TEnum Key => key;
 
-        public TEnum Key {
-            get {
-                return this.key;
-            }
-        }
+        [SerializeField] private AudioClip audioClip;
 
-        [SerializeField]
-        private AudioClip audioClip;
-
-        public AudioClip AudioClip {
-            get {
-                return this.audioClip;
-            }
-        }
-
+        public AudioClip AudioClip => audioClip;
     }
-
 }

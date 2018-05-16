@@ -1,41 +1,37 @@
 ﻿using CAFU.Core.Data.DataStore;
 using CAFU.Music.Data.Entity;
 using CAFU.Music.Domain.Repository;
+using JetBrains.Annotations;
 using UnityEngine;
 
-// ReSharper disable ArrangeAccessorOwnerBody
-
-namespace CAFU.Music.Data.DataStore {
-
-    public abstract class MusicDataStoreSingle<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity {
-
-        public class Factory : SceneDataStoreFactory<MusicDataStoreSingle<TEnum, TMusicEntity>> {
-
+namespace CAFU.Music.Data.DataStore
+{
+    [PublicAPI]
+    public abstract class MusicDataStoreSingle<TEnum, TMusicEntity> : MusicDataStoreBase<TEnum> where TEnum : struct where TMusicEntity : IMusicEntity
+    {
+        public class Factory : SceneDataStoreFactory<MusicDataStoreSingle<TEnum, TMusicEntity>>
+        {
         }
 
-        [SerializeField]
-        private TMusicEntity musicEntity;
+        [SerializeField] private TMusicEntity musicEntity;
 
-        private TMusicEntity MusicEntity {
-            get {
-                return this.musicEntity;
-            }
-        }
+        private TMusicEntity MusicEntity => musicEntity;
 
-        protected override void OnAwake() {
+        protected override void OnAwake()
+        {
             base.OnAwake();
             MusicRepository<TEnum>.DataStoreFactory = new Factory();
         }
 
-        public override AudioClip GetAudioClip(TEnum key) {
-            return this.MusicEntity.AudioClip;
+        public override AudioClip GetAudioClip(TEnum key)
+        {
+            return MusicEntity.AudioClip;
         }
 
-        protected override void OnDestroy() {
+        protected override void OnDestroy()
+        {
             base.OnDestroy();
-            this.musicEntity = default(TMusicEntity);
+            musicEntity = default(TMusicEntity);
         }
-
     }
-
 }
