@@ -7,7 +7,7 @@ namespace CAFU.Music.Generator
     [UsedImplicitly]
     public class MusicEntity : ClassStructureBase
     {
-        private const string StructureName = "Data/Entities/MusicEntity";
+        private const string StructureName = "Data/Entity/MusicEntity";
 
         public override string Name { get; } = StructureName;
 
@@ -31,7 +31,7 @@ namespace CAFU.Music.Generator
             parameter.UsingList.Add("System");
             parameter.UsingList.Add("CAFU.Generics.Data.Entity");
             parameter.UsingList.Add("CAFU.Music.Data.Entity");
-            parameter.UsingList.Add($"{GeneratorWindow.ProjectContext.NamespacePrefix.Trim('.')}.Application.Enumerates");
+            parameter.UsingList.Add($"{this.CreateNamespacePrefix()}Application.Enumerate");
             parameter.UsingList.Add("UnityEngine");
             parameter.BaseClassName = "ScriptableObjectGenericEntity";
             parameter.ImplementsInterfaceList.Add("IMusicEntity<MusicName>");
