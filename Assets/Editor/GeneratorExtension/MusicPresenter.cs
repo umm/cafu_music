@@ -35,6 +35,7 @@ namespace CAFU.Music.GeneratorExtension
                     {
                         Accessibility = Accessibility.Public,
                         Type = "MusicUseCase<MusicName>",
+                        Interface = "IMusicUseCase<MusicName>",
                         Name = "MusicUseCase",
                     }
                 );
