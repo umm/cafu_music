@@ -28,7 +28,7 @@ namespace CAFU.Music.GeneratorExtension
             {
                 parameter.UsingList.Add("CAFU.Music.Presentation.Presenter");
                 parameter.UsingList.Add("CAFU.Music.Domain.UseCase");
-                parameter.UsingList.Add($"{this.CreateNamespacePrefix()}Application.Enumerates");
+                parameter.UsingList.Add($"{this.CreateNamespacePrefix()}Application.Enumerate");
                 parameter.ImplementsInterfaceList.Add("IMusicPresenter<MusicName>");
                 parameter.PropertyList.Add(
                     new Parameter.Property()
