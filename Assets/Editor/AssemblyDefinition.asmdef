@@ -1,0 +1,15 @@
+{
+    "name": "AssemblyDefinition",
+    "references": [
+        "umm@cafu_music",
+        "umm@cafu_generator-Editor",
+        "umm@extra_linq",
+        "umm@context_management"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
