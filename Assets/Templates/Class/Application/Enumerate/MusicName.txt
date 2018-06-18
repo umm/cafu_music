@@ -1,6 +1,0 @@
-##Usings##namespace ##Namespace##
-{
-    public enum ##ClassName##
-    {
-    }
-}
