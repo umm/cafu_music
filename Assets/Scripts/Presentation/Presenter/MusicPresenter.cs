@@ -37,5 +37,10 @@ namespace CAFU.Music.Presentation.Presenter
         {
             presenter.MusicUseCase.SetVolume(volume);
         }
+
+        public static void SetPitch<TEnum>(this IMusicPresenter<TEnum> presenter, float pitch) where TEnum : struct
+        {
+            presenter.MusicUseCase.SetPitch(pitch);
+        }
     }
 }

@@ -72,5 +72,11 @@ namespace CAFU.Music.Domain.Component
         {
             AudioSource.volume = volume;
         }
+
+        public void SetPitch(float pitch)
+        {
+            AudioSource.pitch = pitch;
+        }
+
     }
 }

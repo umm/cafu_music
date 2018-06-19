@@ -18,6 +18,9 @@ namespace CAFU.Music.Domain.UseCase
         void Resume();
 
         void SetVolume(float volume);
+
+        void SetPitch(float pitch);
+
     }
 
     public interface IMusicUseCase<in TEnum> : IUseCase where TEnum : struct
@@ -31,6 +34,9 @@ namespace CAFU.Music.Domain.UseCase
         void Resume();
 
         void SetVolume(float volume);
+
+        void SetPitch(float pitch);
+
     }
 
     public class MusicUseCase<TEnum> : IMusicUseCase<TEnum> where TEnum : struct
@@ -82,5 +88,11 @@ namespace CAFU.Music.Domain.UseCase
         {
             MusicModel.MusicPlayer.SetVolume(volume);
         }
+
+        public void SetPitch(float pitch)
+        {
+            MusicModel.MusicPlayer.SetPitch(pitch);
+        }
+
     }
 }
