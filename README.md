@@ -141,6 +141,12 @@ this.GetPresenter().Resume();
 this.GetPresenter().SetVolume(0.5f);
 ```
 
+#### ピッチ操作
+
+```csharp
+this.GetPresenter().SetPitch(0.5f);
+```
+
 ## License
 
 Copyright (c) 2018 Tetsuya Mori
