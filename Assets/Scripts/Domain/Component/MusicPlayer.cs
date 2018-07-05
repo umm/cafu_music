@@ -40,6 +40,11 @@ namespace CAFU.Music.Domain.Component
             AudioSource.playOnAwake = false;
         }
 
+        private void OnDestroy()
+        {
+            HasInstalled = false;
+        }
+
         public void Inject(IMusicModel musicModel)
         {
             MusicModel = musicModel;
