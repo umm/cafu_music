@@ -11,7 +11,7 @@
 ## Install
 
 ```shell
-npm install github:umm-projects/cafu_music
+npm install github:umm/cafu_music
 ```
 
 ## Usage
