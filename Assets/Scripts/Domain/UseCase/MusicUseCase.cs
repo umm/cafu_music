@@ -72,8 +72,8 @@ namespace CAFU.Music.Domain.UseCase
 
         public void Stop()
         {
-            MusicModel.AudioClip.Value = default(AudioClip);
             MusicModel.MusicPlayer.Stop();
+            MusicModel.AudioClip.Value = default(AudioClip);
         }
 
         public void Pause()
