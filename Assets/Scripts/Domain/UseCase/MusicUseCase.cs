@@ -2,6 +2,7 @@
 using CAFU.Music.Domain.Component;
 using CAFU.Music.Domain.Model;
 using CAFU.Music.Domain.Repository;
+using UnityEngine;
 
 // ReSharper disable UnusedMember.Global
 
@@ -72,6 +73,7 @@ namespace CAFU.Music.Domain.UseCase
         public void Stop()
         {
             MusicModel.MusicPlayer.Stop();
+            MusicModel.AudioClip.Value = default(AudioClip);
         }
 
         public void Pause()
