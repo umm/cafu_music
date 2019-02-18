@@ -83,5 +83,10 @@ namespace CAFU.Music.Domain.Component
             AudioSource.pitch = pitch;
         }
 
+        public bool IsPlaying()
+        {
+            return AudioSource.isPlaying;
+        }
+
     }
 }

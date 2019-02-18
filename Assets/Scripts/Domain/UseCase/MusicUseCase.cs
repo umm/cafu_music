@@ -22,6 +22,7 @@ namespace CAFU.Music.Domain.UseCase
 
         void SetPitch(float pitch);
 
+        bool IsPlaying();
     }
 
     public interface IMusicUseCase<in TEnum> : IUseCase where TEnum : struct
@@ -61,7 +62,7 @@ namespace CAFU.Music.Domain.UseCase
         public void Play(TEnum key, bool loop = true, bool keepIfSame = true)
         {
             // 既に再生中の場合は何もしない
-            if (keepIfSame && MusicModel.AudioClip.Value == MusicRepository.GetAudioClip(key))
+            if (keepIfSame && MusicModel.AudioClip.Value == MusicRepository.GetAudioClip(key) && MusicModel.MusicPlayer.IsPlaying())
             {
                 return;
             }
